@@ -1,25 +1,34 @@
 # 🎯 ChessVision
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![GitHub stars](https://img.shields.io/github/stars/H0NEYP0T-466/ChessVision.svg?style=social&label=Star)](https://github.com/H0NEYP0T-466/ChessVision)
-[![GitHub forks](https://img.shields.io/github/forks/H0NEYP0T-466/ChessVision.svg?style=social&label=Fork)](https://github.com/H0NEYP0T-466/ChessVision/fork)
-[![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/H0NEYP0T-466/ChessVision/issues)
-[![GitHub issues](https://img.shields.io/github/issues/H0NEYP0T-466/ChessVision.svg)](https://github.com/H0NEYP0T-466/ChessVision/issues)
+![GitHub License](https://img.shields.io/github/license/H0NEYP0T-466/ChessVision?style=for-the-badge&color=brightgreen)
+![GitHub Stars](https://img.shields.io/github/stars/H0NEYP0T-466/ChessVision?style=for-the-badge&color=yellow)
+![GitHub Forks](https://img.shields.io/github/forks/H0NEYP0T-466/ChessVision?style=for-the-badge&color=blue)
+![Contributions Welcome](https://img.shields.io/badge/Contributions-Welcome-brightgreen?style=for-the-badge)
+![GitHub Issues](https://img.shields.io/github/issues/H0NEYP0T-466/ChessVision?style=for-the-badge&color=red)
 
 ## 📖 Description
 
 A modern, full-stack chess application built with React and Node.js, featuring real-time multiplayer gameplay, interactive chessboard with drag-and-drop functionality, and Socket.IO-powered live game sessions. This project combines the classic game of chess with modern web technologies to deliver an engaging gaming experience.
 
-**🚀 Key Technologies:** React, Vite, Node.js, Express.js, Socket.IO, Chess.js, EJS
+**🚀 Key Technologies:** JavaScript, React, Vite, ESLint, Node.js, Express.js, Socket.IO, Chess.js, EJS
+
+## 🔗 Links
+
+- [🌐 Demo](https://github.com/H0NEYP0T-466/ChessVision) 
+- [📚 Documentation](https://github.com/H0NEYP0T-466/ChessVision#readme)
+- [🐛 Issues](https://github.com/H0NEYP0T-466/ChessVision/issues)
+- [🤝 Contributing](https://github.com/H0NEYP0T-466/ChessVision/blob/main/CONTRIBUTING.md)
 
 ---
 
 ## 📑 Table of Contents
 
 - [📖 Description](#-description)
+- [🔗 Links](#-links)
 - [⚡ Installation](#-installation)
 - [🎮 Usage](#-usage)
 - [✨ Features](#-features)
+- [🛠️ Built With](#️-built-with)
 - [📂 Folder Structure](#-folder-structure)
 - [🤝 Contributing](#-contributing)
 - [📄 License](#-license)
@@ -73,7 +82,7 @@ A modern, full-stack chess application built with React and Node.js, featuring r
 
 ## 🎮 Usage
 
-### Example Commands
+### 💻 Example Commands
 ```bash
 # Development mode
 npm run dev
@@ -88,7 +97,7 @@ npm run lint
 npm run preview
 ```
 
-### Development Workflow
+### 🚀 Development Workflow
 ```bash
 # Start the application in development mode
 npm run dev
@@ -107,10 +116,28 @@ npm run dev
 
 🔧 **Technical Features:**
 - 📱 **Responsive Design** - Works seamlessly across all devices
-- 🚀 **Modern Tech Stack** - Built with React, Vite, Node.js and 4 more
+- 🚀 **Modern Tech Stack** - Built with JavaScript, React, Vite and 6 more
 - ♻️ **Hot Module Replacement** - Fast development with instant updates
 - 🎯 **Code Quality** - ESLint configuration and best practices
 - 🎨 **Custom Styling** - Beautiful, modern UI with custom CSS
+
+---
+
+## 🛠️ Built With
+
+
+#### Languages
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+
+#### Frameworks
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB) ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white) ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
+
+#### Tools
+![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white) ![ESLint](https://img.shields.io/badge/ESLint-4B3263?style=for-the-badge&logo=eslint&logoColor=white)
+
+#### Libraries
+![Socket.io](https://img.shields.io/badge/Socket.io-black?style=for-the-badge&logo=socket.io&badgeColor=010101) ![Chess.js](https://img.shields.io/badge/Chess.js-000000?style=for-the-badge&logo=chess&logoColor=white) ![EJS](https://img.shields.io/badge/ejs-%23B4CA65.svg?style=for-the-badge&logo=ejs&logoColor=black)
+
 
 ---
 
@@ -138,6 +165,7 @@ ChessVision/
 │   ├── ⚡ App.jsx
 │   ├── 🎨 index.css
 │   └── ⚡ main.jsx
+📖 CONTRIBUTING.md
 ⚡ eslint.config.js
 📄 index.html
 📄 LICENSE
@@ -264,8 +292,10 @@ SOFTWARE.
 ## 🙏 Acknowledgements
 
 ### Libraries & Frameworks
+- 🔥 **JavaScript** - High-level programming language for web development
 - 🔥 **[React](https://reactjs.org/)** - A JavaScript library for building user interfaces
 - 🔥 **[Vite](https://vitejs.dev/)** - Next generation frontend tooling
+- 🔥 **[ESLint](https://eslint.org/)** - Pluggable JavaScript linter for identifying and reporting patterns
 - 🔥 **[Node.js](https://nodejs.org/)** - JavaScript runtime built on Chrome's V8 JavaScript engine
 - 🔥 **[Express.js](https://expressjs.com/)** - Fast, unopinionated web framework for Node.js
 - 🔥 **[Socket.IO](https://socket.io/)** - Real-time bidirectional event-based communication
@@ -285,6 +315,6 @@ SOFTWARE.
 
 [⭐ Star this repo](https://github.com/H0NEYP0T-466/ChessVision) • [🐛 Report Bug](https://github.com/H0NEYP0T-466/ChessVision/issues) • [💡 Request Feature](https://github.com/H0NEYP0T-466/ChessVision/issues)
 
-**Made with ❤️ by the ChessVision team**
+**Made with ❤️ by H0NEYP0T-466**
 
 </div>
