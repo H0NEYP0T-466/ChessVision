@@ -27,7 +27,7 @@ function getRepoInfo() {
   };
 }
 
-// Detect project technologies
+// Detect project technologies and generate tech stack badges
 function detectTechnologies() {
   const technologies = [];
   
@@ -47,6 +47,7 @@ function detectTechnologies() {
     if (deps.tailwindcss) technologies.push('Tailwind CSS');
     if (deps.mongodb || deps.mongoose) technologies.push('MongoDB');
     if (deps.postgresql || deps.pg) technologies.push('PostgreSQL');
+    if (deps.eslint) technologies.push('ESLint');
   }
   
   if (fs.existsSync('backend/package.json')) {
@@ -74,6 +75,77 @@ function detectTechnologies() {
   
   // Remove duplicates
   return [...new Set(technologies)];
+}
+
+// Generate tech stack badges
+function generateTechStackBadges(technologies) {
+  const badges = {
+    // Languages
+    'JavaScript': '![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)',
+    'TypeScript': '![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)',
+    'Python': '![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)',
+    'Rust': '![Rust](https://img.shields.io/badge/rust-%23000000.svg?style=for-the-badge&logo=rust&logoColor=white)',
+    'Go': '![Go](https://img.shields.io/badge/go-%2300ADD8.svg?style=for-the-badge&logo=go&logoColor=white)',
+    
+    // Frontend Frameworks
+    'React': '![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)',
+    'Vue': '![Vue.js](https://img.shields.io/badge/vuejs-%2335495e.svg?style=for-the-badge&logo=vuedotjs&logoColor=%234FC08D)',
+    'Angular': '![Angular](https://img.shields.io/badge/angular-%23DD0031.svg?style=for-the-badge&logo=angular&logoColor=white)',
+    
+    // Backend Frameworks
+    'Node.js': '![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)',
+    'Express.js': '![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)',
+    
+    // Build Tools
+    'Vite': '![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)',
+    'Webpack': '![Webpack](https://img.shields.io/badge/webpack-%238DD6F9.svg?style=for-the-badge&logo=webpack&logoColor=black)',
+    
+    // Databases
+    'MongoDB': '![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)',
+    'PostgreSQL': '![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)',
+    
+    // CSS Frameworks
+    'Tailwind CSS': '![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)',
+    
+    // Libraries
+    'Socket.IO': '![Socket.io](https://img.shields.io/badge/Socket.io-black?style=for-the-badge&logo=socket.io&badgeColor=010101)',
+    'Chess.js': '![Chess.js](https://img.shields.io/badge/Chess.js-000000?style=for-the-badge&logo=chess&logoColor=white)',
+    'EJS': '![EJS](https://img.shields.io/badge/ejs-%23B4CA65.svg?style=for-the-badge&logo=ejs&logoColor=black)',
+    
+    // Tools
+    'ESLint': '![ESLint](https://img.shields.io/badge/ESLint-4B3263?style=for-the-badge&logo=eslint&logoColor=white)',
+    'GitHub Actions': '![GitHub Actions](https://img.shields.io/badge/github%20actions-%232671E5.svg?style=for-the-badge&logo=githubactions&logoColor=white)'
+  };
+  
+  // Add JavaScript if we have Node.js or frontend frameworks
+  if (technologies.includes('Node.js') || technologies.includes('React') || technologies.includes('Vue') || technologies.includes('Angular')) {
+    technologies.unshift('JavaScript');
+  }
+  
+  // Remove duplicates and get badges
+  const uniqueTechs = [...new Set(technologies)];
+  const techBadges = uniqueTechs.map(tech => badges[tech]).filter(Boolean);
+  
+  // Group badges by category
+  const categories = {
+    languages: ['JavaScript', 'TypeScript', 'Python', 'Rust', 'Go'],
+    frameworks: ['React', 'Vue', 'Angular', 'Node.js', 'Express.js'],
+    databases: ['MongoDB', 'PostgreSQL'],
+    tools: ['Vite', 'Webpack', 'ESLint', 'GitHub Actions'],
+    libraries: ['Socket.IO', 'Chess.js', 'EJS', 'Tailwind CSS']
+  };
+  
+  let badgeMarkdown = '';
+  
+  Object.entries(categories).forEach(([category, techs]) => {
+    const categoryBadges = techs.filter(tech => uniqueTechs.includes(tech)).map(tech => badges[tech]).filter(Boolean);
+    if (categoryBadges.length > 0) {
+      const categoryName = category.charAt(0).toUpperCase() + category.slice(1);
+      badgeMarkdown += `\n#### ${categoryName}\n${categoryBadges.join(' ')}\n`;
+    }
+  });
+  
+  return badgeMarkdown;
 }
 
 // Generate folder structure
@@ -229,7 +301,12 @@ function getLibraryDescription(tech) {
     'Node.js': 'JavaScript runtime built on Chrome\'s V8 JavaScript engine',
     'TypeScript': 'JavaScript with syntax for types',
     'Chess.js': 'JavaScript chess library for chess move generation/validation',
-    'EJS': 'Embedded JavaScript templating engine'
+    'EJS': 'Embedded JavaScript templating engine',
+    'ESLint': 'Pluggable JavaScript linter for identifying and reporting patterns',
+    'JavaScript': 'High-level programming language for web development',
+    'MongoDB': 'NoSQL document database for modern applications',
+    'PostgreSQL': 'Advanced open source relational database',
+    'Tailwind CSS': 'Utility-first CSS framework for rapid UI development'
   };
   return descriptions[tech] || 'Modern technology for building applications';
 }
@@ -241,15 +318,16 @@ function generateReadme() {
   const description = generateDescription(repoInfo.name, technologies);
   const installation = generateInstallation(technologies);
   const folderStructure = generateFolderStructure();
+  const techStackBadges = generateTechStackBadges(technologies);
   const currentYear = new Date().getFullYear();
   
   const template = `# 🎯 ${repoInfo.name}
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![GitHub stars](https://img.shields.io/github/stars/${repoInfo.owner}/${repoInfo.name}.svg?style=social&label=Star)](https://github.com/${repoInfo.owner}/${repoInfo.name})
-[![GitHub forks](https://img.shields.io/github/forks/${repoInfo.owner}/${repoInfo.name}.svg?style=social&label=Fork)](https://github.com/${repoInfo.owner}/${repoInfo.name}/fork)
-[![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/${repoInfo.owner}/${repoInfo.name}/issues)
-[![GitHub issues](https://img.shields.io/github/issues/${repoInfo.owner}/${repoInfo.name}.svg)](https://github.com/${repoInfo.owner}/${repoInfo.name}/issues)
+![GitHub License](https://img.shields.io/github/license/${repoInfo.owner}/${repoInfo.name}?style=for-the-badge&color=brightgreen)
+![GitHub Stars](https://img.shields.io/github/stars/${repoInfo.owner}/${repoInfo.name}?style=for-the-badge&color=yellow)
+![GitHub Forks](https://img.shields.io/github/forks/${repoInfo.owner}/${repoInfo.name}?style=for-the-badge&color=blue)
+![Contributions Welcome](https://img.shields.io/badge/Contributions-Welcome-brightgreen?style=for-the-badge)
+![GitHub Issues](https://img.shields.io/github/issues/${repoInfo.owner}/${repoInfo.name}?style=for-the-badge&color=red)
 
 ## 📖 Description
 
@@ -257,14 +335,23 @@ ${description}
 
 **🚀 Key Technologies:** ${technologies.join(', ')}
 
+## 🔗 Links
+
+- [🌐 Demo](https://github.com/${repoInfo.owner}/${repoInfo.name}) 
+- [📚 Documentation](https://github.com/${repoInfo.owner}/${repoInfo.name}#readme)
+- [🐛 Issues](https://github.com/${repoInfo.owner}/${repoInfo.name}/issues)
+- [🤝 Contributing](https://github.com/${repoInfo.owner}/${repoInfo.name}/blob/main/CONTRIBUTING.md)
+
 ---
 
 ## 📑 Table of Contents
 
 - [📖 Description](#-description)
+- [🔗 Links](#-links)
 - [⚡ Installation](#-installation)
 - [🎮 Usage](#-usage)
 - [✨ Features](#-features)
+- [🛠️ Built With](#️-built-with)
 - [📂 Folder Structure](#-folder-structure)
 - [🤝 Contributing](#-contributing)
 - [📄 License](#-license)
@@ -281,7 +368,7 @@ ${installation.replace(/{{OWNER}}/g, repoInfo.owner).replace(/{{REPO_NAME}}/g, r
 
 ## 🎮 Usage
 
-### Example Commands
+### 💻 Example Commands
 \`\`\`bash
 # Development mode
 npm run dev
@@ -296,7 +383,7 @@ npm run lint
 npm run preview
 \`\`\`
 
-### Development Workflow
+### 🚀 Development Workflow
 \`\`\`bash
 # Start the application in development mode
 npm run dev
@@ -319,6 +406,12 @@ npm run dev
 - ♻️ **Hot Module Replacement** - Fast development with instant updates
 - 🎯 **Code Quality** - ESLint configuration and best practices
 - 🎨 **Custom Styling** - Beautiful, modern UI with custom CSS
+
+---
+
+## 🛠️ Built With
+
+${techStackBadges}
 
 ---
 
@@ -457,7 +550,8 @@ ${technologies.map(tech => {
     'Node.js': '[Node.js](https://nodejs.org/)',
     'TypeScript': '[TypeScript](https://www.typescriptlang.org/)',
     'Chess.js': '[Chess.js](https://github.com/jhlywa/chess.js)',
-    'EJS': '[EJS](https://ejs.co/)'
+    'EJS': '[EJS](https://ejs.co/)',
+    'ESLint': '[ESLint](https://eslint.org/)'
   };
   const link = links[tech] || tech;
   return `- 🔥 **${link}** - ${getLibraryDescription(tech)}`;
@@ -476,7 +570,7 @@ ${technologies.map(tech => {
 
 [⭐ Star this repo](https://github.com/${repoInfo.owner}/${repoInfo.name}) • [🐛 Report Bug](https://github.com/${repoInfo.owner}/${repoInfo.name}/issues) • [💡 Request Feature](https://github.com/${repoInfo.owner}/${repoInfo.name}/issues)
 
-**Made with ❤️ by the ${repoInfo.name} team**
+**Made with ❤️ by ${repoInfo.owner}**
 
 </div>`;
 
