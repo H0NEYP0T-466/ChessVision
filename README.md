@@ -1,4 +1,4 @@
-# 🎯 ChessVision
+<img width="1920" height="952" alt="image" src="https://github.com/user-attachments/assets/e8801678-73ad-41e1-bf48-b5a1be626b27" /># 🎯 ChessVision
 
 ![GitHub License](https://img.shields.io/github/license/H0NEYP0T-466/ChessVision?style=for-the-badge&color=brightgreen)
 ![GitHub Stars](https://img.shields.io/github/stars/H0NEYP0T-466/ChessVision?style=for-the-badge&color=yellow)
@@ -122,6 +122,12 @@ npm run dev
 - 🎨 **Custom Styling** - Beautiful, modern UI with custom CSS
 
 ---
+
+<div align="center">
+  <img src="./P1.PNG" alt="Player 1 Board" width="45%" />
+  <img src="./p2.PNG" alt="Player 2 Board" width="45%" />
+  <p><em>Live game state from both players' perspectives</em></p>
+</div>
 
 ## 🛠️ Built With
 
