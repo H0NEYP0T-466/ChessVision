@@ -1,4 +1,4 @@
-<img width="1920" height="952" alt="image" src="https://github.com/user-attachments/assets/e8801678-73ad-41e1-bf48-b5a1be626b27" /># 🎯 ChessVision
+# 🎯 ChessVision
 
 ![GitHub License](https://img.shields.io/github/license/H0NEYP0T-466/ChessVision?style=for-the-badge&color=brightgreen)
 ![GitHub Stars](https://img.shields.io/github/stars/H0NEYP0T-466/ChessVision?style=for-the-badge&color=yellow)
